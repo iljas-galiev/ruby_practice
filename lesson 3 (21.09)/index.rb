@@ -21,6 +21,7 @@ list << 1
 puts list.max
 
 
+
 uniq = list.uniq
 
 uniq.each do |item|
