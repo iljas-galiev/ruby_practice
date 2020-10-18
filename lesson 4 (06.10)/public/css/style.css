@@ -1,0 +1,16 @@
+body {
+    background: #eee;
+}
+
+.todo-items {
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+.todo-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.todo-item:last-child {
+    border: none;
+}
