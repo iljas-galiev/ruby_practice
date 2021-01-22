@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trello</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div class="main-header">
+  <div class="logo">
+    <a href="/">Rails.Trello</a>
+  </div>
+  <div class="user">
+
+  </div>
+</div>
+
+<div class="content">
+  <div class="container">
+    <%= yield %>
+  </div>
+</div>
+</body>
+</html>

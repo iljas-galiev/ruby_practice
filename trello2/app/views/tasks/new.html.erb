@@ -1,0 +1,23 @@
+<% unless flash[:notice].blank? %>
+<div class="alert alert-primary">
+      <strong><%=  flash[:notice]  %></strong>
+</div>
+<%  end %>
+<% unless flash[:error].blank? %>
+<div class="alert alert-danger">
+      <strong><%=  flash[:error]  %></strong>
+</div>
+<%  end %>
+<%= form_for @task, url: {action: :create} do |f| %>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" name="task[title]" value="<%= @task.title %>">
+  </div>
+  <div class="form-group">
+    <label for="desc">Description</label>
+    <textarea class="form-control" id="desc" name="task[description]"><%= @task.description %></textarea>
+  </div>
+  <div class="form-group">
+    <input type="submit" class="btn btn-success" value="Save">
+  </div>
+<% end %>

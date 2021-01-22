@@ -1,0 +1,22 @@
+$green: #00a818;
+$default_margin: 25px;
+.main-header {
+  background: $green;
+  height: 80px;
+  line-height: 30px;
+
+  .logo {
+    padding: $default_margin;
+    a {
+      font-size: 30px;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  background: #eee;
+  padding: $default_margin;
+}

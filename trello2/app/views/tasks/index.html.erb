@@ -1,0 +1,35 @@
+<% unless flash[:notice].blank? %>
+  <div class="alert alert-primary">
+    <strong><%=  flash[:notice]  %></strong>
+  </div>
+<%  end %>
+<% unless flash[:error].blank? %>
+  <div class="alert alert-danger">
+    <strong><%=  flash[:error]  %></strong>
+  </div>
+<%  end %>
+<p>
+  <%= link_to 'Create', new_task_path, class: 'btn btn-success' %>
+</p>
+<table class="table table-bordered">
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Created</th>
+    <th>Updated</th>
+    <th></th>
+  </tr>
+  <% @tasks.each do |task| %>
+
+    <tr>
+      <td><%= task.title %></td>
+      <td><%= task.description %></td>
+      <td><%= task.created_at %></td>
+      <td><%= task.updated_at %></td>
+      <td>
+        <%= link_to 'Edit', edit_task_path(task) %>
+        <%= link_to 'Delete', task_path(task), method: :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>
