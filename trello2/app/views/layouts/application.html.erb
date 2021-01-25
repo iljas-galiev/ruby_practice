@@ -18,12 +18,19 @@
     <a href="/">Rails.Trello</a>
   </div>
   <div class="user">
-
+    <% unless (current_user.nil?) %>
+      <%= current_user.name %>
+      (<%= link_to 'Выход', '/logout', method: :delete %>)
+    <% end %>
   </div>
 </div>
 
 <div class="content">
   <div class="container">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+
     <%= yield %>
   </div>
 </div>

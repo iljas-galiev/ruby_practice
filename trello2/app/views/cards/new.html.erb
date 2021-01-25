@@ -1,0 +1,25 @@
+
+<%= form_for @card do |f| %>
+  <% if @card.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+        <ul>
+          <% @card.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+
+  <div class="form-group">
+
+    <%= f.label :name, "Название" %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+
+    <%= f.submit "Сохранить", class: "btn btn-primary" %>
+  </div>
+<% end %>

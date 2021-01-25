@@ -1,22 +1,61 @@
-$green: #00a818;
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
 $default_margin: 25px;
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .main-header {
-  background: $green;
+  background: #00a818d1;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 1);
   height: 80px;
   line-height: 30px;
+  overflow: hidden;
 
   .logo {
     padding: $default_margin;
+    width: 200px;
+    float:left;
+
     a {
       font-size: 30px;
       color: #fff;
       text-decoration: none;
     }
   }
+  .user {
+
+    float: right;
+    padding: 25px;
+    color: #fff;
+    font-size: 20px;
+    a {
+      color:#fff;
+    }
+  }
 }
 
 .content {
-  display: flex;
-  background: #eee;
+  flex: 1 0 auto;
+  background: #eeeeee82;
   padding: $default_margin;
+}
+
+.cards {
+  .card-task {
+    display: block;
+    padding: 10px;
+    color: #333;
+    background: #f1f1f1;
+    margin-bottom: 10px;
+    text-decoration: none;
+    box-shadow: 0 3px 4px rgba(0,0,0,0.2);
+    &:hover {
+      background: lighten(#f1f1f1,2%);
+    }
+  }
 }

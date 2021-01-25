@@ -1,0 +1,17 @@
+<div class="row justify-content-center">
+  <div class="col-md-7 col-12 ">
+    <div>
+      <%= link_to 'Назад', cards_path %>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <p>
+          <%= link_to 'Редактировать', edit_task_path(id: @task.id), class: 'btn btn-primary' %>
+          <%= link_to 'Удалить', task_path(id: @task.id), class: 'btn btn-danger', method:'delete' %>
+        </p>
+        <h2><%= @task.title %></h2>
+        <p><%= @task.description %></p>
+      </div>
+    </div>
+  </div>
+</div>

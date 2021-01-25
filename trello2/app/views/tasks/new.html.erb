@@ -1,23 +1,28 @@
-<% unless flash[:notice].blank? %>
-<div class="alert alert-primary">
-      <strong><%=  flash[:notice]  %></strong>
-</div>
-<%  end %>
-<% unless flash[:error].blank? %>
-<div class="alert alert-danger">
-      <strong><%=  flash[:error]  %></strong>
-</div>
-<%  end %>
-<%= form_for @task, url: {action: :create} do |f| %>
+<%= form_for @task, url: { action: :create } do |f| %>
+
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+        <ul>
+          <% @task.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+
   <div class="form-group">
-    <label for="title">Title</label>
-    <input type="text" class="form-control" id="title" name="task[title]" value="<%= @task.title %>">
+    <%= f.label :title, "Название" %>
+    <%= f.text_field :title, class: 'form-control' %>
+    <%= f.hidden_field :card_id, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <label for="desc">Description</label>
-    <textarea class="form-control" id="desc" name="task[description]"><%= @task.description %></textarea>
+    <%= f.label :description, "Описание" %>
+    <%= f.text_area :description, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <input type="submit" class="btn btn-success" value="Save">
+    <%= f.submit "Сохранить", class: "btn btn-primary" %>
   </div>
 <% end %>

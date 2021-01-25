@@ -1,0 +1,46 @@
+<div class="overflow-hidden mb-3">
+  <div class="float-left">
+    <%= link_to 'Добавить', new_card_path, class: 'btn btn-success' %>
+  </div>
+  <div class="float-right">
+    <% if params[:archive] %>
+      <%= link_to 'Показать все', cards_path, class: 'btn btn-success' %>
+    <% else %>
+      <%= link_to 'Показать архивные', cards_path(archive: 1), class: 'btn btn-warning' %>
+    <% end %>
+  </div>
+</div>
+<% if @cards.empty? %>
+  <h3 class="text-primary text-center">Карточек нет. Добавьте новую</h3>
+<% end %>
+<div class="cards row">
+  <% @cards.each do |card| %>
+    <div class="col-md-4 col-sm-6 col-12">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="overflow-hidden">
+            <div class="float-left h3">
+              <%= card.name %>
+            </div>
+
+            <div class="float-right">
+              <a href="<%= edit_card_path card %>"><i class="bi bi-pencil"></i></a>
+            </div>
+          </div>
+
+          <% if card.tasks.empty? %>
+            <span class="text-danger">Нет задач</span>
+          <% end %>
+          <% card.tasks.each do |task| %>
+            <%= link_to task.title, task_path(task.id), class: 'card-task' %>
+          <% end %>
+          <div>
+            <%= link_to 'Добавить задачу', new_task_path(id: card.id), class: 'btn btn-primary btn-sm' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
