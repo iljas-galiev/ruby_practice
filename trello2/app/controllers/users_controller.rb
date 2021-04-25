@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   include AuthHelper
   before_action :not_logged, only: [:new, :create]
+  protect_from_forgery with: :null_session
 
   def new
     @user = User.new

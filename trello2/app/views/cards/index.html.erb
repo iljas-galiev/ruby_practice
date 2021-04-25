@@ -33,7 +33,7 @@
             <span class="text-danger">Нет задач</span>
           <% end %>
           <% card.tasks.each do |task| %>
-            <%= link_to task.title, task_path(task.id), class: 'card-task' %>
+            <%= link_to task.title, task_path(task.id), class: 'card-task ' + (task.is_checked ? 'card-task-done' : '') %>
           <% end %>
           <div>
             <%= link_to 'Добавить задачу', new_task_path(id: card.id), class: 'btn btn-primary btn-sm' %>

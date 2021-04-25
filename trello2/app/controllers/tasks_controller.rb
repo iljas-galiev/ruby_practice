@@ -7,18 +7,12 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find_by(id: params[:id])
+    @task = Task.find_by(id: params[:id], user_id: current_user.id)
 
     if @task.nil?
       redirect_to cards_path
-      return
     end
 
-    if @task.user_id != current_user.id
-      flash[:danger] = 'Ошибка'
-      redirect_to cards_path
-      return
-    end
   end
 
   def new
@@ -30,9 +24,9 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @card = Card.find_by(id: @task.card_id)
+    @card = Card.find_by(id: @task.card_id, user_id: current_user.id)
 
-    if @card.nil? || @card.user_id != current_user.id
+    if @card.nil?
       flash[:danger] = 'Ошибка при сохранении'
       redirect_to cards_path
       return
@@ -49,29 +43,16 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find_by(id: params[:id])
+    @task = Task.find_by(id: params[:id], user_id: current_user.id)
 
     if @task.nil?
       redirect_to cards_path
-      return
-    end
-
-    if @task.user_id != current_user.id
-      flash[:danger] = 'Ошибка'
-      redirect_to cards_path
-      return
     end
   end
 
   def update
-    @task = Task.find(params[:id])
+    @task = Task.find_by(id: params[:id], user_id: current_user.id)
     if @task.nil?
-      redirect_to cards_path
-      return
-    end
-
-    if @task.user_id != current_user.id
-      flash[:danger] = 'Ошибка'
       redirect_to cards_path
       return
     end
@@ -85,15 +66,27 @@ class TasksController < ApplicationController
     end
   end
 
-  def destroy
-    @task = Task.find_by(id: params[:id])
+  def check
+    @task = Task.find_by(id: params[:id], user_id: current_user.id)
     if @task.nil?
       redirect_to cards_path
       return
     end
 
-    if @task.user_id != current_user.id
-      flash[:danger] = 'Ошибка'
+    task_params = { :checked => @task.is_checked ? 0 : 1 }
+
+    if @task.update_attributes(task_params)
+      flash[:primary] = 'Задача обновлена'
+      redirect_to @task
+    else
+      flash[:danger] = 'Ошибка при сохранении'
+      render :edit
+    end
+  end
+
+  def destroy
+    @task = Task.find_by(id: params[:id], user_id: current_user.id)
+    if @task.nil?
       redirect_to cards_path
       return
     end

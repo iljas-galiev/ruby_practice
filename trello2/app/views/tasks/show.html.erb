@@ -8,6 +8,7 @@
         <p>
           <%= link_to 'Редактировать', edit_task_path(id: @task.id), class: 'btn btn-primary' %>
           <%= link_to 'Удалить', task_path(id: @task.id), class: 'btn btn-danger', method:'delete' %>
+          <%= link_to @task.is_checked ? 'Не выполнено' :  'Выполнено', check_task_url(id: @task.id), class: 'btn btn-warning', method:'get' %>
         </p>
         <h2><%= @task.title %></h2>
         <p><%= @task.description %></p>

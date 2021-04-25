@@ -57,5 +57,9 @@ body {
     &:hover {
       background: lighten(#f1f1f1,2%);
     }
+
+    &.card-task-done {
+      text-decoration: line-through;
+    }
   }
 }

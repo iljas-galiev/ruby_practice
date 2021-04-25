@@ -6,6 +6,9 @@ class AuthController < ApplicationController
   before_action :not_logged, only: [:new, :create]
   before_action :logged_in?, only: [:destroy]
 
+
+  protect_from_forgery with: :null_session
+
   def new
   end
 

@@ -1,14 +1,11 @@
 # spec/models/task_spec.rb
-
 require 'rails_helper'
 
 RSpec.describe Task, :type => :model do
   subject {
     described_class.new(title: "Anything",
                         description: "Lorem ipsum",
-                        created_at: DateTime.now.to_i,
-                        card_id: 1,
-                        user_id: 1)
+                        created_at: DateTime.now.to_i)
   }
 
   it "is valid with valid attributes" do

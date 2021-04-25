@@ -4,9 +4,9 @@ class CardsController < ApplicationController
 
   def index
     if params[:archive]
-      @cards = Card.all
+      @cards = Card.archive.user(current_user.id).all
     else
-      @cards = Card.not_archive.all
+      @cards = Card.not_archive.user(current_user.id).all
     end
   end
 
@@ -27,11 +27,22 @@ class CardsController < ApplicationController
   end
 
   def edit
-    @card = Card.find(params[:id])
+    @card = Card.find_by(id: params[:id], user_id: current_user.id)
+
+
+    if @card.nil?
+      redirect_to cards_path
+    end
   end
 
   def update
-    @card = Card.find(params[:id])
+    @card = Card.find_by(id: params[:id], user_id: current_user.id)
+
+
+    if @card.nil?
+      redirect_to cards_path
+    end
+
     if @card.update_attributes(card_params)
       flash[:primary] = 'Карточка обновлена'
       redirect_to cards_path
@@ -42,7 +53,10 @@ class CardsController < ApplicationController
   end
 
   def destroy
-    @card = Card.find(params[:id])
+    @card = Card.find_by(id: params[:id], user_id: current_user.id)
+    if @card.nil?
+      redirect_to cards_path
+    end
     if @card.destroy
       flash[:primary] = "Карточка #{@card.name} удалена"
       redirect_to cards_path
